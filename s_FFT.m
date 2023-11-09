@@ -36,6 +36,7 @@ n = 2^nextpow2(length(TimeSeries));  % Find the next power of 2
 TimeSeries = [TimeSeries; zeros(n - length(TimeSeries), 1)];  % Zero pad TimeSeries
 fs = SampleRate;
 y = fft(TimeSeries);
+
 if FFTshift
     n = length(TimeSeries);
     X_Freq = (-n/2:n/2-1)*(fs/n);
