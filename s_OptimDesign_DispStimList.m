@@ -1,4 +1,11 @@
 function [Efficiency,TrialStats] = s_OptimDesign_DispStimList(StimList,PARAMS,varargin)
+% Display the Stimuli List in a table and calculate the design efficiency
+% 
+% 
+% 
+% Written by Kunru Song 2023.10.29
+% Updated by Kunru Song 2023.11.10
+
 [p,PARAMS] = s_DispStimList_ParseInput(StimList,PARAMS);
 StimList = p.Results.StimList;
 TrialStats = array2table(tabulate(StimList),...

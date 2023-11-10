@@ -3,15 +3,26 @@ function [y,X_Freq]=s_FFT(TimeSeries,SampleRate,varargin)
 % Fast Fourier Transformation for fMRI Design Matrix Analysis
 %
 % Input:
-% TimeSerires - a vector for reocrded time series
-% SampleRate - the sampling rate for time series, in Hz, (i.e. 1/TR)
-%
+% TimeSerires - a vector for reocrded time series, that is, a column in the
+%               generated design matrix.
+% SampleRate  - the sampling rate for time series, in Hz, (i.e. 1/TR)
+% Optional Input (key-value pairs):
+% 'FFTshift'  - logical, flag controls the X-axis shifting for FFT
+%               Default is true
+% 'Windowing' - logical, flag controls the application of Hanning window,
+%               which aims to prevent frequnecy leakage.
+%               Default is false
+% 'Spectrum'  - string, 'Power' or 'Magnitude', which determines type
+%               of the output frequency spectrum.
+%               Default is 'Power'
+% 
 % Output:
 % y - the y-axis value for frequency spectrum
 % X_Freq - the x-axis value for frequency spectrum
 %
 % Written by Kunru Song 2021.12.23
 % Updated by Kunru Song 2023.10.29
+% Annotation added by Kunru Song 2023.11.10
 
 p = s_FFT_ParseInput(TimeSeries,SampleRate,varargin{:});
 TimeSeries = p.Results.TimeSeries;
