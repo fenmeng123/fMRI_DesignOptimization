@@ -18,11 +18,11 @@ GA.conditions = [1 2];
 GA.freqConditions = [.6 .2];
 	% vector of frequencies of each trial type; should sum to 1
 
-GA.scanLength = 360;  
+GA.scanLength = 400;  
 	% how long your run is, in seconds.  
     % This and the ISI determine how many stimuli are in each design vector
 
-GA.ISI = 1;  
+GA.ISI = 1.5;  
 	% how long between stimulus presentations? (you can also include "rest" presentations)
 	% also the time resolution of stimulus condition function (list of stimuli)
 	% designs will be constructed in time units of this resolution
@@ -30,7 +30,7 @@ GA.ISI = 1;
 GA.TR = 2; 
     % the TR (sampling resolution) of your experiment; time for volume acquisition
 
-GA.epochdur = 1;        % build epochs instead of events; enter dur in sec (default is events, 0 sec)
+GA.epochdur = 0.5;        % build epochs instead of events; enter dur in sec (default is events, 0 sec)
 
 % Hox optimization parameters
 % A hox gene is a master gene.  These numbers control the stimulus
@@ -56,7 +56,7 @@ nmodels = 1;
 	% how many runs do you want to optimize?
 	% GA runs one separate optimization for each model.
 
-GA.cbalColinPowerWeights = [0.5 2 1 0.5];	% 1 = cbal, 2 = eff, 3 = hrf shape, 4 = freq
+GA.cbalColinPowerWeights = [0.1 2 1 0.5];	% 1 = cbal, 2 = eff, 3 = hrf shape, 4 = freq
 	% first element: counterbalancing of stimuli
 	% second: contrast detection efficiency
 	% third: hrf shape estimation efficiency
@@ -66,9 +66,9 @@ GA.cbalColinPowerWeights = [0.5 2 1 0.5];	% 1 = cbal, 2 = eff, 3 = hrf shape, 4 
 	% does not have to sum to 1.
 
 
-GA.numGenerations = 10000; 
+GA.numGenerations = 1000; 
 	% how many iterations of the GA to run.
-GA.sizeGenerations = 400;  
+GA.sizeGenerations = 200;  
 	% how many designs to test  for each generation?  Population size.
 GA.maxTime = 600;						
 	% max time to run in s, or Inf for infinite time
@@ -76,7 +76,7 @@ GA.maxTime = 600;
 
 GA.alph = 2.1; 
 	% "selection pressure": higher is more extreme selection; always pick the best 50% of designs
-	%1 is no selection pressure at all, or random selection of designs for recombination
+	% 1 is no selection pressure at all, or random selection of designs for recombination
 	% selection pressure is like in evolution; refers to whether the best designs are selected to
 	% continue on to the next generation.
 	% an intermediate value is best, to keep the population heterogeneity high.
@@ -113,8 +113,8 @@ GA.maxOrder = 1;
 % Empty brackets indicate the option is not to be used.
 
 GA.NumStimthresh = [];      % maximum number of repeats of any one event type in a row
-GA.maxCbalDevthresh = []; 	% maximum acceptable counterbalancing deviation (actual freq - expected freq)
-GA.maxFreqDevthresh = [0.105];   % maximum acceptable deviation from input frequencies (GA.freqConditions)
+GA.maxCbalDevthresh = [0.1]; 	% maximum acceptable counterbalancing deviation (actual freq - expected freq)
+GA.maxFreqDevthresh = [0.21];   % maximum acceptable deviation from input frequencies (GA.freqConditions)
 
 % Contrast setup
 % ---------------------------------------------------------------
@@ -183,8 +183,6 @@ GA.nonlinthreshold = [2];
 % ---------------------------------------------------------------
 eval(['load ' AutocorrelationFileName]);  
 GA.xc = myscannerxc;
-
-
 
 
 

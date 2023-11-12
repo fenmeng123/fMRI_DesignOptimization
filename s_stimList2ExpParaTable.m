@@ -64,28 +64,14 @@ stimTable = movevars(stimTable,'stimOnset','After','JitterDura');
 stimTable = movevars(stimTable,'stimOffset','After','stimOnset');
 stimTable = movevars(stimTable,'TrialEnd','After','stimOffset');
 stimTable = movevars(stimTable,'TrialDura','After','TrialEnd');
-%% 
-tabulate(stimTable.stimType)
-fprintf('ISI Mean(SD)[unit] = %.4f (%.4f) [seconds]\n',mean(stimTable.ISI)/1000,std(double(stimTable.ISI))/1000)
 
-onsets = s_stimTable2onsets(stimTable);
-fprintf('----------HRF: Canonical HRF (SPM)----------\n')
-X = onsets2fmridesign(onsets, GA.TR, GA.scanLength,'hrf');
-stimTableEfficiency = calcEfficiency(PARAMS.contrastweights,PARAMS.contrasts,pinv(X),[],PARAMS.dflag);
-fprintf('Design Efficiency for stimTable = %.4f\n',stimTableEfficiency)
-fprintf('VIF = %.4f\n',getvif(X))
-fprintf('----------HRF: Canonical HRF + Time derivative----------\n')
-X = onsets2fmridesign(onsets, GA.TR, GA.scanLength,'hrf (with time derivative)');
-stimTableEfficiency = calcEfficiency(1,[1 0 -1 0 0],pinv(X),[],PARAMS.dflag);
-fprintf('Design Efficiency for stimTable = %.4f\n',stimTableEfficiency)
-fprintf('VIF = %.4f\n',getvif(X))
-fprintf('----------HRF: Canonical HRF + Time & Dispersion derivatives----------\n')
-X = onsets2fmridesign(onsets, GA.TR, GA.scanLength,'hrf (with time and dispersion derivatives)');
-stimTableEfficiency = calcEfficiency(1,[1 0 0 -1 0 0 0],pinv(X),[],PARAMS.dflag);
-fprintf('Design Efficiency for stimTable = %.4f\n',stimTableEfficiency)
-fprintf('VIF = %.4f\n',getvif(X))
+PARAMS.contrast_type1 = [1 -1 0];
+PARAMS.contrast_type2 = [1 0 -1 0 0];
+PARAMS.contrast_type3 = [1 0 0 -1 0 0 0];
+OptimParas = s_CalcEfficiency_3types(stimTable,GA,PARAMS);
 
 SaveMatName = strrep(FinalDesign,'Finalmodel','FinalStimTable');
 save(SaveMatName,'stimTable')
-writetable(stimTable,strrep(SaveMatName,'mat','xlsx'))
+writetable(stimTable,strrep(SaveMatName,'mat','xlsx'),'Sheet','fMRI_Experiment_Design_Table')
+writecell(OptimParas,strrep(SaveMatName,'mat','xlsx'),'Sheet','Optimization_Parameters')
 
