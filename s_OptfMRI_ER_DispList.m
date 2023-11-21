@@ -1,17 +1,17 @@
-function [Efficiency,TrialStats] = s_OptimDesign_DispStimList(StimList,PARAMS,varargin)
-% Display the Stimuli List in a table and calculate the design efficiency
+function [Efficiency,TrialStats] = s_OptfMRI_ER_DispList(stimList,PARAMS,varargin)
+% Display the Stimuli List in a table and calculate design efficiency.
 % 
 % 
 % 
 % Written by Kunru Song 2023.10.29
 % Updated by Kunru Song 2023.11.10
 
-[p,PARAMS] = s_DispStimList_ParseInput(StimList,PARAMS);
-StimList = p.Results.StimList;
-TrialStats = array2table(tabulate(StimList),...
+[p,PARAMS] = s_DispStimList_ParseInput(stimList,PARAMS);
+stimList = p.Results.StimList;
+TrialStats = array2table(tabulate(stimList),...
     'VariableNames',{'Condition_Number','Counts','Percentage'});
 disp(TrialStats);
-model = designvector2model(StimList,...
+model = designvector2model(stimList,...
     PARAMS.ISI,PARAMS.HRF,PARAMS.TR,...
     PARAMS.numsamps,PARAMS.nonlinthreshold,PARAMS.S);
 xtxitx = pinv(model);   % a-optimality   % inv(X'S'SX)*(SX)'; pseudoinv of (S*X)
@@ -23,8 +23,9 @@ end
 
 
 
-function [p,PARAMS] = s_DispStimList_ParseInput(StimList,PARAMS)
-if ~isvector(StimList)
+function [p,PARAMS] = s_DispStimList_ParseInput(stimList,PARAMS)
+% Parse the input of s_OptfMRI_Disp_stimList
+if ~isvector(stimList)
     error('Input StimList must be a vector.');
 end
 if ~isstruct(PARAMS)
@@ -33,7 +34,7 @@ end
 p = inputParser;
 addRequired(p,'StimList',@isvector);
 addRequired(p,'PARAMS',@isstruct);
-parse(p,StimList,PARAMS);
+parse(p,stimList,PARAMS);
 PARAMS = validatePARAMS(p.Results.PARAMS);
 end
 

@@ -1,5 +1,4 @@
-function [y,X_Freq]=s_FFT(TimeSeries,SampleRate,varargin)
-% [y,X_Freq]=s_FFT(TimeSeries,SampleRate,varargin)
+function [y,X_Freq]=s_OptfMRI_FFT(TimeSeries,SampleRate,varargin)
 % Fast Fourier Transformation for fMRI Design Matrix Analysis
 %
 % Input:

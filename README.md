@@ -31,7 +31,7 @@ In this table, we showed an experiment design for a Go-Nogo fMRI task.&#x20;
 
 - **stimType:** The type of stimuli, user-defined column with string content. It is commonly called as "**Condition**" in a psychological experiment.
 
-Starting at the third column, values inside a singe cell reflect the onset (_Start_), offset (_end_), or duration (_Dura_) across different aspects in a psychological stimulus. As default, unit of these values are \*\*milliseconds (ms) \*\*with unsigned 32-digit integer data type (**uint32**). For onset and offset, values indicate a specific time point in a time series that covers the whole scanning length. For duration, values indicate a specific time window that reflect the time of duration for a jitter, a trial, or a inter-stimuli-interval (ISI).
+Starting at the third column, values inside a singe cell reflect the onset (_Start_), offset (_end_), or duration (_Dura_) across different aspects in a psychological stimulus. As default, unit of these values are **milliseconds** (ms) with unsigned 32-digit integer data type (**uint32**). For onset and offset, values indicate a specific time point in a time series that covers the whole scanning length. For duration, values indicate a specific time window that reflect the time of duration for a jitter, a trial, or a inter-stimuli-interval (ISI).
 
 - **ISI:** Inter-stimuli-interval. The time of duration between two successive stimuli.
 

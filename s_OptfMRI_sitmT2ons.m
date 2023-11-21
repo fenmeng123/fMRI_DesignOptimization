@@ -1,7 +1,8 @@
-function onsets = s_stimTable2onsets(stimTable)
+function onsets = s_OptfMRI_sitmT2ons(stimTable)
 % Convert a Stimuli Table into an onset cell.
 % 
 % Input:
+%   Positional Arguments (Requried):
 %   stimTable - a MATLAB table that follows the standard format in README
 %               At least two columns are required in the input table.
 %               "stimType" and "stimOnset"

@@ -1,5 +1,18 @@
-function ResCell = s_CalcEfficiency_3types(stimTable,GA,PARAMS)
-% Calculating design efficiency for three different type of HRF
+function ResCell = s_OptfMRI_Calc_Effs(stimTable,GA,PARAMS)
+% Calculating design efficiency for three different type of HRF.
+% Including SPM: 1) canonical HRF; 2) HRF with time derivatives; 3) HRF
+% with time and dispersion derivatives.
+% 
+% Input:
+%   Positional Arguments (Required):
+%       stimTable - a stimuli table follows standard OptfMRI format.
+%       GA - a struct of generic algorithm settsing, inherits from
+%            Canlab-Core's OptimizeDesign11 module.
+%       PARAMS - a struct of task-fMRI modelling parameters, inherits from
+%               Canlab-Core's Model_building_tools module.
+% Output:
+%   ResCell - a cell array contains all information about task-fMRI
+%               modelling parameters and calculated design efficiency.
 % 
 % Written by Kunru Song 2023.11.12
 
